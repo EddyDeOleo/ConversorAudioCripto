@@ -1,0 +1,18 @@
+# =====================================================================
+# DEPENDENCIAS DEL PROYECTO
+# Conversor de Audio a Texto con Encriptación
+# Python 3.10.11
+# =====================================================================
+
+# Conversión de audio a texto
+SpeechRecognition==3.10.0
+pydub==0.25.1
+PyAudio==0.2.14
+
+# Encriptación
+cryptography==41.0.7
+
+# Utilidades
+python-dotenv==1.0.0
+
+
