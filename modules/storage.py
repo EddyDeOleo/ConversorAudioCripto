@@ -4,6 +4,7 @@ import os
 from datetime import datetime
 import logging
 from config import ARCHIVO_CONVERSIONES, DATOS_DIR
+import base64  
 
 logger = logging.getLogger(__name__)
 
@@ -16,11 +17,11 @@ class StorageManager:
       "archivo_origen": "nombre.mp3",
       "ruta": "/ruta/..",
       "texto": "texto claro",
-      "texto_encriptado": "base64bytes...",
-      "hex_encriptado": "0a0b...",
+      "texto_encriptado": "gAAAAABpMMK0...",
+      "codigo_maquina": "UklGR... (Base64)",
       "duracion_segundos": 12.34,
       "info_audio": {...},
-      "fecha": "2025-12-02T14:00:00"
+      "fecha": "2025-12-02T14:00:00Z"
     }
     """
     def __init__(self, archivo=ARCHIVO_CONVERSIONES):
@@ -55,7 +56,7 @@ class StorageManager:
     def agregar_conversion(self, registro: dict):
         """
         Agrega un registro. El parámetro registro debe contener al menos:
-        'archivo_origen', 'ruta', 'texto', 'texto_encriptado', 'duracion_segundos', 'info_audio'
+        'archivo_origen', 'ruta', 'texto', 'texto_encriptado', 'codigo_maquina', 'duracion_segundos', 'info_audio'
         """
         data = self._leer_todo()
         conversiones = data.get("conversiones", [])
@@ -66,14 +67,24 @@ class StorageManager:
             "archivo_origen": registro.get("archivo_origen"),
             "ruta": registro.get("ruta"),
             "texto": registro.get("texto"),
-            "texto_encriptado": registro.get("texto_encriptado").decode('utf-8') if isinstance(registro.get("texto_encriptado"), (bytes, bytearray)) else registro.get("texto_encriptado"),
-            "hex_encriptado": registro.get("hex_encriptado"),
+            "texto_encriptado": (
+                registro.get("texto_encriptado").decode('utf-8')
+                if isinstance(registro.get("texto_encriptado"), (bytes, bytearray))
+                else registro.get("texto_encriptado")
+            ),
+            "codigo_maquina": (
+                registro.get("codigo_maquina").decode('utf-8')
+                if isinstance(registro.get("codigo_maquina"), (bytes, bytearray))
+                else registro.get("codigo_maquina")
+            ),
             "duracion_segundos": registro.get("duracion_segundos"),
             "info_audio": registro.get("info_audio"),
             "fecha": datetime.utcnow().isoformat() + "Z"
         }
+
         conversiones.append(registro_final)
         data["conversiones"] = conversiones
+
         exito = self._escribir_todo(data)
         if exito:
             logger.info(f"Registro agregado con id {next_id}")

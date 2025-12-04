@@ -5,6 +5,7 @@ from tkinter.scrolledtext import ScrolledText
 import threading
 import os
 import logging
+import base64  # ← IMPORTANTE
 
 from .encriptacion import EncriptadorFernet
 from .audio_converter import AudioConverter
@@ -31,9 +32,6 @@ class AppGUI:
         self.root.geometry(f"{ANCHO_VENTANA}x{ALTO_VENTANA}")
         self.root.configure(bg=COLOR_FONDO)
 
-        # --------------------------
-        # 🎨 Estilos modernos
-        # --------------------------
         style = ttk.Style()
         style.theme_use("clam")
 
@@ -81,6 +79,7 @@ class AppGUI:
         self.ruta_audio = None
         self.texto_extraido = ""
         self.texto_encriptado = None
+        self.bytes_audio = None  # ← NUEVO
 
         # Construir UI
         self._construir_ui()
@@ -131,24 +130,21 @@ class AppGUI:
         )
         lbl_info.pack(anchor='w', padx=10, pady=(10,0))
 
-        # 🎯 CAMBIO IMPORTANTE → wrap=tk.CHAR (NO MÁS SCROLL HORIZONTAL)
         self.txt_info = ScrolledText(
             self.root,
             height=20,
             font=("Consolas", 10),
-            wrap=tk.CHAR      # ←<<<< CAMBIO AQUI
+            wrap=tk.CHAR
         )
         self.txt_info.pack(fill='both', expand=True, padx=10, pady=5)
         self.txt_info.configure(bg="#0e141a", fg="#b0e0ff", insertbackground="white")
 
-    # --------------------- THREADS ---------------------
     def _thread(self, func):
         def wrapper():
             t = threading.Thread(target=func, daemon=True)
             t.start()
         return wrapper
 
-    # --------------------- SELECCIONAR ARCHIVO ---------------------
     def seleccionar_archivo(self):
         ruta = filedialog.askopenfilename(
             title="Seleccionar archivo de audio",
@@ -160,6 +156,7 @@ class AppGUI:
 
             try:
                 info = self.audio_converter.obtener_info_audio(ruta)
+                self.bytes_audio = self.audio_converter.obtener_bytes_audio(ruta, max_bytes=None)  # ← NUEVO
 
                 resumen = (
                     f"Nombre: {info.get('nombre_archivo')}\n"
@@ -171,8 +168,7 @@ class AppGUI:
                     f"Bits por muestra: {info.get('bits_por_muestra')}\n"
                 )
 
-                b = self.audio_converter.obtener_bytes_audio(ruta, max_bytes=None)
-                raw_text = b.decode("latin-1", errors="replace")
+                raw_text = self.bytes_audio.decode("latin-1", errors="replace")
 
                 self.txt_info.delete('1.0', tk.END)
                 self.txt_info.insert(tk.END, resumen + "\n=== Contenido RAW (código máquina): ===\n" + raw_text)
@@ -181,7 +177,6 @@ class AppGUI:
                 logger.exception("Error mostrando info de audio")
                 messagebox.showerror("Error", f"No se pudo leer info del audio: {e}")
 
-    # --------------------- AUDIO → TEXTO ---------------------
     def convertir_a_texto(self):
         if not self.ruta_audio:
             messagebox.showwarning("Atención", "Seleccione un archivo primero")
@@ -200,9 +195,7 @@ class AppGUI:
             info = self.audio_converter.obtener_info_audio(self.ruta_audio)
             self.txt_info.delete('1.0', tk.END)
 
-            bytes_preview = self.audio_converter.obtener_bytes_audio(self.ruta_audio, max_bytes=None)
-            raw_text = bytes_preview.decode("latin-1", errors="replace")
-
+            raw_text = self.bytes_audio.decode("latin-1", errors="replace")
             info_text = (
                 f"Nombre: {info.get('nombre_archivo')}\n"
                 f"Formato: {info.get('formato')}\n"
@@ -210,62 +203,51 @@ class AppGUI:
                 f"Duración (s): {info.get('duracion_segundos')}\n\n"
                 f"=== Contenido RAW (código máquina): ===\n{raw_text}"
             )
-
             self.txt_info.insert(tk.END, info_text)
 
         except Exception as e:
             logger.exception("Error al convertir a texto")
             messagebox.showerror("Error", str(e))
 
-    # --------------------- ENCRIPTAR ---------------------
     def encriptar_texto(self):
         if not self.texto_extraido.strip():
             messagebox.showwarning("Atención", "No hay texto para encriptar.")
             return
         try:
             self.texto_encriptado = self.encriptador.encriptar_texto(self.texto_extraido)
-
             self.txt_hex.delete('1.0', tk.END)
             self.txt_hex.insert(tk.END, self.texto_encriptado.decode('utf-8'))
-
             messagebox.showinfo("Éxito", MENSAJES['exito_encriptacion'])
-
         except Exception as e:
             logger.exception("Error encriptando")
             messagebox.showerror("Error", str(e))
 
-    # --------------------- DESENCRIPTAR ---------------------
     def desencriptar_texto(self):
         if not self.texto_encriptado:
             messagebox.showwarning("Atención", "No hay texto encriptado.")
             return
         try:
             texto = self.encriptador.desencriptar_texto(self.texto_encriptado)
-
             self.txt_res.delete('1.0', tk.END)
             self.txt_res.insert(tk.END, texto)
-
             messagebox.showinfo("Éxito", MENSAJES['exito_desencriptacion'])
-
         except Exception as e:
             logger.exception("Error desencriptando")
             messagebox.showerror("Error", str(e))
 
-    # --------------------- GUARDAR ---------------------
     def guardar_registro(self):
         if not self.ruta_audio:
             messagebox.showwarning("Atención", "Seleccione un archivo primero")
             return
         try:
             info_audio = self.audio_converter.obtener_info_audio(self.ruta_audio)
-            hex_enc = self.texto_encriptado.decode('utf-8') if self.texto_encriptado else None
 
             registro = {
                 "archivo_origen": os.path.basename(self.ruta_audio),
                 "ruta": self.ruta_audio,
                 "texto": self.texto_extraido,
                 "texto_encriptado": self.texto_encriptado,
-                "hex_encriptado": hex_enc,
+                "codigo_maquina": base64.b64encode(self.bytes_audio).decode('utf-8') if self.bytes_audio else None,
                 "duracion_segundos": info_audio.get("duracion_segundos"),
                 "info_audio": info_audio
             }
