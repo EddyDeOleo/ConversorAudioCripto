@@ -1,18 +1,50 @@
+##
+# @file dependencias.txt
+# @brief Lista oficial de dependencias del proyecto "Conversor de Audio a Texto con Encriptación".
+#
+# @details
+# Este archivo contiene todas las librerías externas necesarias para ejecutar
+# correctamente el sistema. Incluye dependencias para:
+#   - Conversión de audio.
+#   - Procesamiento de audio.
+#   - Reconocimiento de voz.
+#   - Encriptación de datos.
+#   - Manejo de variables de entorno.
+#
+# Las versiones se fijan explícitamente para garantizar compatibilidad,
+# estabilidad y evitar conflictos entre librerías.
+#
+# @version 1.0
+# @date 2025
+# @author Eddy
+#
+# @note Requiere Python 3.10.11 o superior.
+##
+
 # =====================================================================
 # DEPENDENCIAS DEL PROYECTO
 # Conversor de Audio a Texto con Encriptación
 # Python 3.10.11
 # =====================================================================
 
+# ---------------------------------------------------------------------
 # Conversión de audio a texto
-SpeechRecognition==3.10.0
-pydub==0.25.1
-PyAudio==0.2.14
+# ---------------------------------------------------------------------
 
+SpeechRecognition==3.10.0     # Motor de reconocimiento de voz (Google Speech API)
+pydub==0.25.1                 # Procesamiento y conversión básica de audio
+PyAudio==0.2.14               # Entrada de audio (opcional, pero usado por SR)
+
+# ---------------------------------------------------------------------
 # Encriptación
-cryptography==41.0.7
+# ---------------------------------------------------------------------
 
+cryptography==41.0.7          # Implementación del cifrado simétrico (Fernet)
+
+# ---------------------------------------------------------------------
 # Utilidades
-python-dotenv==1.0.0
+# ---------------------------------------------------------------------
+
+python-dotenv==1.0.0          # Carga variables desde .env (si se usa en producción)
 
 

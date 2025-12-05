@@ -1,3 +1,15 @@
+"""
+@file encriptacion.py
+@brief Módulo encargado de manejar encriptación y desencriptación con Fernet.
+@author Eddy De Oleo
+@version 1.0.0
+
+Este módulo contiene la clase `EncriptadorFernet`, la cual simplifica el uso de
+Fernet para encriptación simétrica. Maneja:
+- Encriptar texto → token en Base64 (bytes)
+- Desencriptar token → texto original
+- Obtener información del proceso de encriptación
+"""
 
 from cryptography.fernet import Fernet
 from config import FERNET_KEY
@@ -5,15 +17,25 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 class EncriptadorFernet:
     """
-    Manejo limpio de encriptación Fernet:
-    - Encripta texto → token base64 (bytes)
-    - Desencripta token → texto original (str)
-    Sin conversiones HEX ni binario.
+    @class EncriptadorFernet
+    @brief Clase para manejar encriptación/descencriptación usando Fernet.
+
+    Implementa una interfaz simple para:
+    - Encriptar texto como tokens Fernet Base64
+    - Desencriptarlos de vuelta a texto plano
+    - Consultar metadatos de encriptación
+
+    No utiliza formatos intermedios (Hex, binario), solo Fernet puro.
     """
 
     def __init__(self):
+        """
+        @brief Constructor: inicializa el cifrador Fernet.
+        @exception Exception Error si la clave Fernet no es válida.
+        """
         try:
             self.cipher = Fernet(FERNET_KEY)
             logger.info("Cipher Fernet inicializado correctamente")
@@ -22,7 +44,15 @@ class EncriptadorFernet:
             raise
 
     def encriptar_texto(self, texto: str) -> bytes:
-        """Encripta texto y retorna token Fernet puro."""
+        """
+        @brief Encripta un texto y retorna el token Fernet.
+
+        @param texto Texto plano a encriptar.
+        @return bytes Token seguro en Base64 (url-safe).
+        @exception ValueError Si el texto está vacío.
+
+        @note Devuelve bytes, no string.
+        """
         if not texto or texto.strip() == "":
             raise ValueError("El texto no puede estar vacío")
 
@@ -34,7 +64,13 @@ class EncriptadorFernet:
         return token
 
     def desencriptar_texto(self, token: bytes) -> str:
-        """Desencripta token Fernet puro."""
+        """
+        @brief Desencripta un token Fernet y retorna texto plano.
+
+        @param token Token generado por Fernet.
+        @return str Texto original desencriptado.
+        @exception ValueError Si el token está vacío.
+        """
         if not token:
             raise ValueError("El token no puede estar vacío")
 
@@ -46,7 +82,17 @@ class EncriptadorFernet:
         return texto
 
     def obtener_info_encriptacion(self, texto_original: str, token: bytes):
-        """Información sobre la encriptación."""
+        """
+        @brief Retorna metadatos sobre la encriptación ejecutada.
+
+        @param texto_original Texto original previo a encriptación.
+        @param token Token Fernet generado.
+        @return dict Información del proceso:
+                - longitud_original
+                - longitud_encriptada
+                - algoritmo
+                - formato
+        """
         return {
             "longitud_original": len(texto_original),
             "longitud_encriptada": len(token),
@@ -56,7 +102,11 @@ class EncriptadorFernet:
 
 
 def generar_nueva_clave():
-    """Genera una nueva clave Fernet."""
+    """
+    @brief Genera y muestra por consola una nueva clave Fernet.
+    @return bytes Nueva clave generada.
+    @warning Guardar la clave en un entorno seguro.
+    """
     nueva = Fernet.generate_key()
     print("=" * 70)
     print("🔑 NUEVA CLAVE FERNET GENERADA")
