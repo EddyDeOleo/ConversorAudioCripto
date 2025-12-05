@@ -65,10 +65,7 @@ class AppGUI:
             font=("Segoe UI", 10)
         )
 
-        style.configure(
-            "TFrame",
-            background=SECUNDARIO
-        )
+        style.configure("TFrame", background=SECUNDARIO)
 
         # Instancias de negocio
         self.audio_converter = AudioConverter()
@@ -79,9 +76,9 @@ class AppGUI:
         self.ruta_audio = None
         self.texto_extraido = ""
         self.texto_encriptado = None
-        self.bytes_audio = None  # ← NUEVO
+        self.bytes_audio = None
 
-        # Construir UI
+        # Construcción UI
         self._construir_ui()
 
     def _construir_ui(self):
@@ -106,6 +103,14 @@ class AppGUI:
         btn_guardar = ttk.Button(frm_top, text="Guardar conversión", command=self._thread(self.guardar_registro))
         btn_guardar.grid(row=1, column=3, padx=5, pady=5)
 
+        # === NUEVO: CUADRO SUPERIOR SOLO PARA INFORMACIÓN DEL AUDIO ===
+        lbl_info_audio = ttk.Label(self.root, text="Información del archivo:", font=FUENTE_NORMAL)
+        lbl_info_audio.pack(anchor='w', padx=10, pady=(10, 0))
+
+        self.txt_info_audio = ScrolledText(self.root, height=6, font=("Consolas", 10), wrap=tk.WORD)
+        self.txt_info_audio.pack(fill='x', padx=10, pady=5)
+        self.txt_info_audio.configure(bg="#0e141a", fg="#b0e0ff", insertbackground="white")
+
         # === Texto extraído ===
         lbl_res = ttk.Label(self.root, text="Texto extraído:", font=FUENTE_NORMAL)
         lbl_res.pack(anchor='w', padx=10, pady=(10,0))
@@ -122,22 +127,13 @@ class AppGUI:
         self.txt_hex.pack(fill='x', padx=10, pady=5)
         self.txt_hex.configure(bg="#0e141a", fg="cyan", insertbackground="white")
 
-        # === RAW info ===
-        lbl_info = ttk.Label(
-            self.root,
-            text="Información del archivo / bytes (código máquina):",
-            font=FUENTE_NORMAL
-        )
-        lbl_info.pack(anchor='w', padx=10, pady=(10,0))
+        # === RAW CODE ABAJO ===
+        lbl_raw = ttk.Label(self.root, text="Código RAW (código máquina):", font=FUENTE_NORMAL)
+        lbl_raw.pack(anchor='w', padx=10, pady=(10,0))
 
-        self.txt_info = ScrolledText(
-            self.root,
-            height=20,
-            font=("Consolas", 10),
-            wrap=tk.CHAR
-        )
-        self.txt_info.pack(fill='both', expand=True, padx=10, pady=5)
-        self.txt_info.configure(bg="#0e141a", fg="#b0e0ff", insertbackground="white")
+        self.txt_raw = ScrolledText(self.root, height=20, font=("Consolas", 10), wrap=tk.CHAR)
+        self.txt_raw.pack(fill='both', expand=True, padx=10, pady=5)
+        self.txt_raw.configure(bg="#0e141a", fg="#b0e0ff", insertbackground="white")
 
     def _thread(self, func):
         def wrapper():
@@ -156,8 +152,9 @@ class AppGUI:
 
             try:
                 info = self.audio_converter.obtener_info_audio(ruta)
-                self.bytes_audio = self.audio_converter.obtener_bytes_audio(ruta, max_bytes=None)  # ← NUEVO
+                self.bytes_audio = self.audio_converter.obtener_bytes_audio(ruta, max_bytes=None)
 
+                # === INFO DEL AUDIO ARRIBA ===
                 resumen = (
                     f"Nombre: {info.get('nombre_archivo')}\n"
                     f"Formato: {info.get('formato')}\n"
@@ -168,10 +165,13 @@ class AppGUI:
                     f"Bits por muestra: {info.get('bits_por_muestra')}\n"
                 )
 
-                raw_text = self.bytes_audio.decode("latin-1", errors="replace")
+                self.txt_info_audio.delete('1.0', tk.END)
+                self.txt_info_audio.insert(tk.END, resumen)
 
-                self.txt_info.delete('1.0', tk.END)
-                self.txt_info.insert(tk.END, resumen + "\n=== Contenido RAW (código máquina): ===\n" + raw_text)
+                # === RAW CODE ABAJO ===
+                raw_text = self.bytes_audio.decode("latin-1", errors="replace")
+                self.txt_raw.delete('1.0', tk.END)
+                self.txt_raw.insert(tk.END, raw_text)
 
             except Exception as e:
                 logger.exception("Error mostrando info de audio")
@@ -191,19 +191,6 @@ class AppGUI:
             self.txt_res.insert(tk.END, texto)
 
             messagebox.showinfo("Éxito", MENSAJES['exito_conversion'])
-
-            info = self.audio_converter.obtener_info_audio(self.ruta_audio)
-            self.txt_info.delete('1.0', tk.END)
-
-            raw_text = self.bytes_audio.decode("latin-1", errors="replace")
-            info_text = (
-                f"Nombre: {info.get('nombre_archivo')}\n"
-                f"Formato: {info.get('formato')}\n"
-                f"Tamaño (KB): {info.get('tamano_kb')}\n"
-                f"Duración (s): {info.get('duracion_segundos')}\n\n"
-                f"=== Contenido RAW (código máquina): ===\n{raw_text}"
-            )
-            self.txt_info.insert(tk.END, info_text)
 
         except Exception as e:
             logger.exception("Error al convertir a texto")
