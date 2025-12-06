@@ -1,0 +1,5 @@
+<map id="modules.interfaz.AppGUI._set_status" name="modules.interfaz.AppGUI._set_status">
+<area shape="rect" id="Node000001" title="Cambia el texto del título de la ventana." alt="" coords="276,5,448,48"/>
+<area shape="rect" id="Node000002" href="$classmodules_1_1interfaz_1_1_app_g_u_i.html#a98474c55ac33ff1132580bb5bc69db25" title="Convierte el archivo de audio a texto mediante Speech Recognition." alt="" coords="5,5,228,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="257,27,228,29,228,24,263,27"/>
+</map>
