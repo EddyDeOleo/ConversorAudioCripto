@@ -1,5 +1,0 @@
-<map id="modules.interfaz.AppGUI._construir_ui" name="modules.interfaz.AppGUI._construir_ui">
-<area shape="rect" id="Node000001" title="Construye todos los elementos de la interfaz gráfica." alt="" coords="5,5,178,48"/>
-<area shape="rect" id="Node000002" href="$classmodules_1_1interfaz_1_1_app_g_u_i.html#a7c0fbf925b55caf6c934d1ddf9d13add" title="Permite seleccionar un archivo de audio desde el explorador." alt="" coords="226,5,464,48"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="178,24,213,26,207,27,178,29"/>
-</map>

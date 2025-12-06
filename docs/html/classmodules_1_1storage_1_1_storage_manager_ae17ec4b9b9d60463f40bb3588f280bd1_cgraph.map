@@ -1,9 +1,0 @@
-<map id="modules.storage.StorageManager.agregar_conversion" name="modules.storage.StorageManager.agregar_conversion">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,39,269,81"/>
-<area shape="rect" id="Node000002" href="$classmodules_1_1storage_1_1_storage_manager.html#ab369664374d0c3e0c746849e11c572fb" title=" " alt="" coords="317,5,537,48"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="269,42,304,41,298,42,270,47"/>
-<area shape="rect" id="Node000003" href="$classmodules_1_1storage_1_1_storage_manager.html#a79a7f8c650a2ebdc6b31cfd311472e46" title=" " alt="" coords="317,72,537,115"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="269,73,304,79,298,79,269,78"/>
-<area shape="rect" id="Node000004" href="$classmodules_1_1storage_1_1_storage_manager.html#ab4293433b17fdfcd0991f9561858c135" title=" " alt="" coords="585,72,805,115"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="537,91,572,93,567,93,537,96"/>
-</map>

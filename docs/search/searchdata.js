@@ -22,12 +22,12 @@ var indexSectionNames =
 
 var indexSectionLabels =
 {
-  0: "All",
-  1: "Classes",
-  2: "Namespaces",
-  3: "Files",
-  4: "Functions",
+  0: "Todos",
+  1: "Clases",
+  2: "Espacios de nombres",
+  3: "Archivos",
+  4: "Funciones",
   5: "Variables",
-  6: "Pages"
+  6: "Páginas"
 };
 
