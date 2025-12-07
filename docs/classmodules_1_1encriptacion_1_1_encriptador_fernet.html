@@ -92,12 +92,15 @@ $(function(){initNavTree('classmodules_1_1encriptacion_1_1_encriptador_fernet.ht
   <div class="headertitle"><div class="title">Referencia de la clase modules.encriptacion.EncriptadorFernet</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Diagrama de Flujo (Métodos encriptar_texto y desencriptar_texto).  
+ <a href="#details">Más...</a></p>
 <div class="dynheader">
 Diagrama de colaboración de modules.encriptacion.EncriptadorFernet:</div>
 <div class="dyncontent">
 <div class="center"><img src="classmodules_1_1encriptacion_1_1_encriptador_fernet__coll__graph.png" border="0" usemap="#amodules_8encriptacion_8_encriptador_fernet_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="amodules_8encriptacion_8_encriptador_fernet_coll__map" id="amodules_8encriptacion_8_encriptador_fernet_coll__map">
-<area shape="rect" title=" " alt="" coords="5,5,209,155"/>
+<area shape="rect" title="Diagrama de Flujo (Métodos encriptar_texto y desencriptar_texto)." alt="" coords="5,5,209,155"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -113,7 +116,11 @@ Atributos públicos</h2></td></tr>
 <tr class="memitem:a8e253242125b8b3da18291a435fa1934" id="r_a8e253242125b8b3da18291a435fa1934"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8e253242125b8b3da18291a435fa1934">cipher</a> = Fernet(FERNET_KEY)</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Descripción detallada</h2>
-<div class="textblock"><pre class="fragment">@class EncriptadorFernet
+<div class="textblock"><p>Diagrama de Flujo (Métodos encriptar_texto y desencriptar_texto). </p>
+<p>Este diagrama de actividad representa los dos flujos principales dentro del <a class="el" href="classmodules_1_1encriptacion_1_1_encriptador_fernet.html" title="Diagrama de Flujo (Métodos encriptar_texto y desencriptar_texto).">EncriptadorFernet</a>: encriptación y desencriptación. </p><div class="plantumlgraph">
+<img src="inline_umlgraph_3.png" />
+</div>
+<pre class="fragment">@class EncriptadorFernet
 @brief Clase para manejar encriptación/descencriptación usando Fernet.
 
 Implementa una interfaz simple para:
@@ -123,7 +130,7 @@ Implementa una interfaz simple para:
 
 No utiliza formatos intermedios (Hex, binario), solo Fernet puro.
 </pre> 
-<p class="definition">Definición en la línea <a class="el" href="encriptacion_8py_source.html#l00021">21</a> del archivo <a class="el" href="encriptacion_8py_source.html">encriptacion.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="encriptacion_8py_source.html#l00059">59</a> del archivo <a class="el" href="encriptacion_8py_source.html">encriptacion.py</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Documentación de constructores y destructores</h2>
 <a id="a362d200cc9a737a84c3abadf0d6ea37c" name="a362d200cc9a737a84c3abadf0d6ea37c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a362d200cc9a737a84c3abadf0d6ea37c">&#9670;&#160;</a></span>__init__()</h2>
@@ -142,7 +149,7 @@ No utiliza formatos intermedios (Hex, binario), solo Fernet puro.
 <pre class="fragment">@brief Constructor: inicializa el cifrador Fernet.
 @exception Exception Error si la clave Fernet no es válida.
 </pre> 
-<p class="definition">Definición en la línea <a class="el" href="encriptacion_8py_source.html#l00034">34</a> del archivo <a class="el" href="encriptacion_8py_source.html">encriptacion.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="encriptacion_8py_source.html#l00072">72</a> del archivo <a class="el" href="encriptacion_8py_source.html">encriptacion.py</a>.</p>
 
 </div>
 </div>
@@ -171,7 +178,7 @@ No utiliza formatos intermedios (Hex, binario), solo Fernet puro.
 @return str Texto original desencriptado.
 @exception ValueError Si el token está vacío.
 </pre> 
-<p class="definition">Definición en la línea <a class="el" href="encriptacion_8py_source.html#l00066">66</a> del archivo <a class="el" href="encriptacion_8py_source.html">encriptacion.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="encriptacion_8py_source.html#l00104">104</a> del archivo <a class="el" href="encriptacion_8py_source.html">encriptacion.py</a>.</p>
 
 </div>
 </div>
@@ -201,7 +208,7 @@ No utiliza formatos intermedios (Hex, binario), solo Fernet puro.
 
 @note Devuelve bytes, no string.
 </pre> 
-<p class="definition">Definición en la línea <a class="el" href="encriptacion_8py_source.html#l00046">46</a> del archivo <a class="el" href="encriptacion_8py_source.html">encriptacion.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="encriptacion_8py_source.html#l00084">84</a> del archivo <a class="el" href="encriptacion_8py_source.html">encriptacion.py</a>.</p>
 
 </div>
 </div>
@@ -238,7 +245,7 @@ No utiliza formatos intermedios (Hex, binario), solo Fernet puro.
         - algoritmo
         - formato
 </pre> 
-<p class="definition">Definición en la línea <a class="el" href="encriptacion_8py_source.html#l00084">84</a> del archivo <a class="el" href="encriptacion_8py_source.html">encriptacion.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="encriptacion_8py_source.html#l00126">126</a> del archivo <a class="el" href="encriptacion_8py_source.html">encriptacion.py</a>.</p>
 
 </div>
 </div>
@@ -255,7 +262,7 @@ No utiliza formatos intermedios (Hex, binario), solo Fernet puro.
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definición en la línea <a class="el" href="encriptacion_8py_source.html#l00040">40</a> del archivo <a class="el" href="encriptacion_8py_source.html">encriptacion.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="encriptacion_8py_source.html#l00078">78</a> del archivo <a class="el" href="encriptacion_8py_source.html">encriptacion.py</a>.</p>
 
 </div>
 </div>

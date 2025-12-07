@@ -92,12 +92,15 @@ $(function(){initNavTree('classmodules_1_1audio__converter_1_1_audio_converter.h
   <div class="headertitle"><div class="title">Referencia de la clase modules.audio_converter.AudioConverter</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Diagrama de Flujo (Método extraer_texto_de_audio).  
+ <a href="#details">Más...</a></p>
 <div class="dynheader">
 Diagrama de colaboración de modules.audio_converter.AudioConverter:</div>
 <div class="dyncontent">
 <div class="center"><img src="classmodules_1_1audio__converter_1_1_audio_converter__coll__graph.png" border="0" usemap="#amodules_8audio__converter_8_audio_converter_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="amodules_8audio__converter_8_audio_converter_coll__map" id="amodules_8audio__converter_8_audio_converter_coll__map">
-<area shape="rect" title=" " alt="" coords="5,5,172,197"/>
+<area shape="rect" title="Diagrama de Flujo (Método extraer_texto_de_audio)." alt="" coords="5,5,172,197"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -115,7 +118,11 @@ Atributos públicos</h2></td></tr>
 <tr class="memitem:a63931fe60e103880ce23e4a4e2ad5939" id="r_a63931fe60e103880ce23e4a4e2ad5939"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a63931fe60e103880ce23e4a4e2ad5939">recognizer</a> = sr.Recognizer()</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Descripción detallada</h2>
-<div class="textblock"><pre class="fragment">@class AudioConverter
+<div class="textblock"><p>Diagrama de Flujo (Método extraer_texto_de_audio). </p>
+<p>Este diagrama de actividad representa el flujo de ejecución completo del proceso de extracción de texto, incluyendo validación y manejo de errores. </p><div class="plantumlgraph">
+<img src="inline_umlgraph_2.png" />
+</div>
+<pre class="fragment">@class AudioConverter
 @brief Convierte audios a texto utilizando Google Speech Recognition.
 
 Esta clase centraliza toda la lógica relacionada con:
@@ -124,7 +131,7 @@ Esta clase centraliza toda la lógica relacionada con:
 - Reconocimiento de voz (speech-to-text)
 - Obtención de fragmentos RAW del archivo (bytes)
 </pre> 
-<p class="definition">Definición en la línea <a class="el" href="audio__converter_8py_source.html#l00027">27</a> del archivo <a class="el" href="audio__converter_8py_source.html">audio_converter.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="audio__converter_8py_source.html#l00075">75</a> del archivo <a class="el" href="audio__converter_8py_source.html">audio_converter.py</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Documentación de constructores y destructores</h2>
 <a id="a5754b2f147ca5d70b4c6618c0f9b091c" name="a5754b2f147ca5d70b4c6618c0f9b091c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5754b2f147ca5d70b4c6618c0f9b091c">&#9670;&#160;</a></span>__init__()</h2>
@@ -146,7 +153,7 @@ Configura parámetros como:
 - Umbral de energía
 - Detección dinámica de ruido
 </pre> 
-<p class="definition">Definición en la línea <a class="el" href="audio__converter_8py_source.html#l00039">39</a> del archivo <a class="el" href="audio__converter_8py_source.html">audio_converter.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="audio__converter_8py_source.html#l00087">87</a> del archivo <a class="el" href="audio__converter_8py_source.html">audio_converter.py</a>.</p>
 
 </div>
 </div>
@@ -172,12 +179,12 @@ Configura parámetros como:
 <pre class="fragment">@brief Convierte un archivo de audio a formato WAV 16kHz mono.
 
 @param ruta_audio Ruta original del audio.
-@return (str, float) — Ruta del WAV generado, duración en segundos.
+@return (str, float) - Ruta del WAV generado, duración en segundos.
 @throws Exception si ocurre un error en la conversión.
 
 El archivo WAV se guarda temporalmente dentro de AUDIOS_DIR.
 </pre> 
-<p class="definition">Definición en la línea <a class="el" href="audio__converter_8py_source.html#l00087">87</a> del archivo <a class="el" href="audio__converter_8py_source.html">audio_converter.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="audio__converter_8py_source.html#l00135">135</a> del archivo <a class="el" href="audio__converter_8py_source.html">audio_converter.py</a>.</p>
 <div class="dynheader">
 Gráfico de llamadas a esta función:</div>
 <div class="dyncontent">
@@ -212,7 +219,7 @@ Gráfico de llamadas a esta función:</div>
 <pre class="fragment">@brief Extrae texto hablado desde un archivo de audio.
 
 @param ruta_audio Ruta del archivo a transcribir.
-@return (str, float) — Texto reconocido, duración.
+@return (str, float) - Texto reconocido, duración.
 @throws Exception cuando el reconocimiento no puede realizarse.
 
 Flujo:
@@ -221,7 +228,7 @@ Flujo:
 3. Ajuste al ruido
 4. Reconocimiento con Google Speech Recognition
 </pre> 
-<p class="definition">Definición en la línea <a class="el" href="audio__converter_8py_source.html#l00126">126</a> del archivo <a class="el" href="audio__converter_8py_source.html">audio_converter.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="audio__converter_8py_source.html#l00174">174</a> del archivo <a class="el" href="audio__converter_8py_source.html">audio_converter.py</a>.</p>
 <div class="dynheader">
 Gráfico de llamadas de esta función:</div>
 <div class="dyncontent">
@@ -264,9 +271,9 @@ Gráfico de llamadas de esta función:</div>
 
 @param ruta_audio Ruta al archivo.
 @param max_bytes Cantidad máxima de bytes a leer.
-@return bytes — Fragmento del archivo en crudo.
+@return bytes - Fragmento del archivo en crudo.
 </pre> 
-<p class="definition">Definición en la línea <a class="el" href="audio__converter_8py_source.html#l00198">198</a> del archivo <a class="el" href="audio__converter_8py_source.html">audio_converter.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="audio__converter_8py_source.html#l00246">246</a> del archivo <a class="el" href="audio__converter_8py_source.html">audio_converter.py</a>.</p>
 
 </div>
 </div>
@@ -293,7 +300,7 @@ Gráfico de llamadas de esta función:</div>
 @param ruta_audio Ruta al archivo.
 @return dict con formato, tamaño, duración, canales, etc.
 </pre> 
-<p class="definition">Definición en la línea <a class="el" href="audio__converter_8py_source.html#l00215">215</a> del archivo <a class="el" href="audio__converter_8py_source.html">audio_converter.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="audio__converter_8py_source.html#l00263">263</a> del archivo <a class="el" href="audio__converter_8py_source.html">audio_converter.py</a>.</p>
 
 </div>
 </div>
@@ -318,14 +325,14 @@ Gráfico de llamadas de esta función:</div>
 <pre class="fragment">@brief Valida la existencia, extensión y tamaño del archivo.
 
 @param ruta_archivo Ruta absoluta al archivo de audio.
-@return (bool, str) — Es válido, mensaje.
+@return (bool, str) - Es válido, mensaje.
 
 Validaciones realizadas:
 - El archivo existe
 - Extensión permitida
 - No excede el tamaño máximo configurado
 </pre> 
-<p class="definition">Definición en la línea <a class="el" href="audio__converter_8py_source.html#l00057">57</a> del archivo <a class="el" href="audio__converter_8py_source.html">audio_converter.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="audio__converter_8py_source.html#l00105">105</a> del archivo <a class="el" href="audio__converter_8py_source.html">audio_converter.py</a>.</p>
 <div class="dynheader">
 Gráfico de llamadas a esta función:</div>
 <div class="dyncontent">
@@ -352,7 +359,7 @@ Gráfico de llamadas a esta función:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definición en la línea <a class="el" href="audio__converter_8py_source.html#l00047">47</a> del archivo <a class="el" href="audio__converter_8py_source.html">audio_converter.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="audio__converter_8py_source.html#l00095">95</a> del archivo <a class="el" href="audio__converter_8py_source.html">audio_converter.py</a>.</p>
 
 </div>
 </div>

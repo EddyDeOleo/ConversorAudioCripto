@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['validar_5farchivo_0',['validar_archivo',['../classmodules_1_1audio__converter_1_1_audio_converter.html#a19f7b1e4285989ac463407b96d69cc8a',1,'modules::audio_converter::AudioConverter']]],
-  ['validar_5fconfiguracion_1',['validar_configuracion',['../namespaceconfig.html#a555f907deadc6bb7014b23d3479ce253',1,'config']]]
+  ['usar_5fbase_5fdatos_0',['USAR_BASE_DATOS',['../namespaceconfig.html#ab31f2296590660640d6da02a7b1c5e04',1,'config']]],
+  ['usuario_20en_20la_20interfaz_1',['Este diagrama describe el flujo de acciones disponibles para el usuario en la interfaz.',['../classmodules_1_1interfaz_1_1_app_g_u_i.html#autotoc_md1',1,'']]]
 ];

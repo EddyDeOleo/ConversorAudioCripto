@@ -1,14 +1,14 @@
-"""
-@file audio_converter.py
-@brief Contiene la clase encargada de convertir audios y extraer texto mediante reconocimiento de voz.
-
-Esta clase encapsula:
-- Validación de archivos de audio
-- Conversión a WAV estándar (16kHz, mono)
-- Procesamiento con Google Speech Recognition
-- Obtención de metadatos del archivo
-- Lectura de bytes para mostrar contenido RAW (código máquina)
-"""
+##
+# @file audio_converter.py
+# @brief Contiene la clase encargada de convertir audios y extraer texto mediante reconocimiento de voz.
+#
+# Esta clase encapsula:
+# - Validación de archivos de audio
+# - Conversión a WAV estándar (16kHz, mono)
+# - Procesamiento con Google Speech Recognition
+# - Obtención de metadatos del archivo
+# - Lectura de bytes para mostrar contenido RAW (código máquina)
+##
 
 import speech_recognition as sr
 from pydub import AudioSegment
@@ -23,6 +23,54 @@ from config import (
 
 logger = logging.getLogger(__name__)
 
+# ==============================================================================
+# DIAGRAMA DE ACTIVIDAD PLANTUML (CORREGIDO)
+# Este bloque se coloca fuera de la docstring para asegurar el renderizado
+# ==============================================================================
+
+## Diagrama de Flujo (Método extraer_texto_de_audio)
+#
+# Este diagrama de actividad representa el flujo de ejecución completo
+# del proceso de extracción de texto, incluyendo validación y manejo de errores.
+# @startuml
+# title Flujo: Extraer Texto de Audio
+# 
+# start
+# 
+# :Validar Archivo (validar_archivo);
+# 
+# if (Archivo es válido?) is (No)
+#   :Lanzar Excepción (ValueError);
+#   stop
+# endif
+# 
+# partition Conversión {
+#   if (Formato es WAV?) is (No)
+#     :Convertir a WAV (16kHz, mono);
+#     :Obtener ruta_wav y duración;
+#   else (Sí)
+#     :Obtener duración de WAV;
+#   endif
+# }
+# 
+# #LightBlue:Ajustar a ruido ambiente;
+# :Procesar Audio;
+# #LightBlue:Transcribir usando Google Speech Recognition;
+# 
+# if (Reconocimiento fue exitoso?) is (Sí)
+#   :Limpieza (Eliminar WAV temporal);
+#   :Retornar (Texto, Duración);
+#   stop
+# else (No/Error)
+#   :Limpieza (Eliminar WAV temporal);
+#   if (Error es de Conexión/Servicio?) is (Sí)
+#     :Lanzar Excepción (sr.RequestError);
+#   else (No se entendió el audio)
+#     :Lanzar Excepción (sr.UnknownValueError);
+#   endif
+#   stop
+# endif
+# @enduml
 
 class AudioConverter:
     """
@@ -59,7 +107,7 @@ class AudioConverter:
         @brief Valida la existencia, extensión y tamaño del archivo.
 
         @param ruta_archivo Ruta absoluta al archivo de audio.
-        @return (bool, str) — Es válido, mensaje.
+        @return (bool, str) - Es válido, mensaje.
 
         Validaciones realizadas:
         - El archivo existe
@@ -89,7 +137,7 @@ class AudioConverter:
         @brief Convierte un archivo de audio a formato WAV 16kHz mono.
 
         @param ruta_audio Ruta original del audio.
-        @return (str, float) — Ruta del WAV generado, duración en segundos.
+        @return (str, float) - Ruta del WAV generado, duración en segundos.
         @throws Exception si ocurre un error en la conversión.
 
         El archivo WAV se guarda temporalmente dentro de AUDIOS_DIR.
@@ -128,7 +176,7 @@ class AudioConverter:
         @brief Extrae texto hablado desde un archivo de audio.
 
         @param ruta_audio Ruta del archivo a transcribir.
-        @return (str, float) — Texto reconocido, duración.
+        @return (str, float) - Texto reconocido, duración.
         @throws Exception cuando el reconocimiento no puede realizarse.
 
         Flujo:
@@ -176,7 +224,7 @@ class AudioConverter:
             return texto, duracion
 
         except sr.UnknownValueError:
-            logger.warning("⚠️  No se pudo entender el audio")
+            logger.warning("⚠️ No se pudo entender el audio")
             if ruta_wav and os.path.exists(ruta_wav):
                 os.remove(ruta_wav)
             raise Exception("No se pudo entender el audio. Usa voz clara.")
@@ -201,7 +249,7 @@ class AudioConverter:
 
         @param ruta_audio Ruta al archivo.
         @param max_bytes Cantidad máxima de bytes a leer.
-        @return bytes — Fragmento del archivo en crudo.
+        @return bytes - Fragmento del archivo en crudo.
         """
         try:
             with open(ruta_audio, 'rb') as f:
@@ -247,4 +295,3 @@ class AudioConverter:
                 'formato': extension,
                 'error': str(e)
             }
-

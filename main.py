@@ -62,8 +62,41 @@ def configurar_logging():
 # =====================================================================
 
 def main():
-    """
+    """!
     @brief Inicia la aplicación completa.
+    
+    A continuación, se presenta el Diagrama de Secuencia para el proceso clave de Conversión y Encriptación.
+    
+    @startuml
+    title Escenario: Conversión y Encriptación de Audio
+    
+    actor Usuario
+    participant AppGUI as "interfaz.py"
+    participant AudioConverter as "audio_converter.py"
+    participant CryptoEngine as "encriptacion.py"
+    participant Storage as "storage.py"
+    
+    Usuario -> AppGUI : click_en_Convertir(ruta_audio)
+    
+    AppGUI -> AudioConverter : cargar_y_analizar(ruta_audio)
+    activate AudioConverter
+    AudioConverter -> AudioConverter : convertir_a_texto()
+    return texto_plano, metadata_audio
+    deactivate AudioConverter
+    
+    AppGUI -> CryptoEngine : encriptar_texto(texto_plano, CLAVE_FERNET)
+    activate CryptoEngine
+    return texto_encriptado
+    deactivate CryptoEngine
+    
+    AppGUI -> Storage : guardar_registro(texto_encriptado, datos_raw, metadata_audio)
+    activate Storage
+    Storage -> Storage : escribir_en_json(conversiones.json)
+    return Registro_Guardado
+    deactivate Storage
+    
+    AppGUI -> Usuario : notificacion_Exito()
+    @enduml
     
     - Configura logging.
     - Instancia la interfaz gráfica.

@@ -1,14 +1,3 @@
-# modules/interfaz.py
-
-## @file interfaz.py
-#  @brief Módulo que define la interfaz gráfica del conversor de audio a texto con encriptación.
-#  @details Este módulo contiene la clase AppGUI, responsable de la interfaz,
-#           interacción con el usuario, carga de archivos, conversión a texto,
-#           encriptación, desencriptación y almacenamiento de registros.
-#  @author Eddy
-#  @date 2025
-#  @version 1.0
-
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
 from tkinter.scrolledtext import ScrolledText
@@ -36,18 +25,47 @@ from config import (
 logger = logging.getLogger(__name__)
 
 ## @class AppGUI
-#  @brief Clase principal de la interfaz gráfica.
-#  @details Crea la ventana, los componentes gráficos y gestiona
+# @brief Clase principal de la interfaz gráfica.
+# @details Crea la ventana, los componentes gráficos y gestiona
 #           todas las acciones del usuario relacionadas con:
-#           - Selección de audio  
-#           - Conversión a texto  
-#           - Encriptación y desencriptación  
-#           - Visualización de RAW  
+#           - Selección de audio 
+#           - Conversión a texto 
+#           - Encriptación y desencriptación 
+#           - Visualización de RAW 
 #           - Guardado de registros
+#
+# ## Diagrama de Flujo (Lógica de la Interfaz)
+# # Este diagrama describe el flujo de acciones disponibles para el usuario en la interfaz.
+# @startuml
+# title Flujo de Procesamiento (Lógica de la Interfaz)
+#
+# start
+# :AppGUI Lanzada;
+# :Usuario selecciona archivo;
+#
+# repeat
+#   if (Click en 'Convertir a Texto') then (Sí)
+#     :AudioConverter.extraer_texto_de_audio();
+#     :Mostrar Texto Extraído;
+#   elseif (Click en 'Encriptar Texto') then (Sí)
+#     :CryptoEngine.encriptar_texto();
+#     :Mostrar Texto Encriptado;
+#   elseif (Click en 'Desencriptar Texto') then (Sí)
+#     :CryptoEngine.desencriptar_texto();
+#     :Mostrar Texto Desencriptado;
+#   elseif (Click en 'Guardar conversión') then (Sí)
+#     :StorageManager.agregar_conversion();
+#   else (No)
+#     :Esperar acción de usuario;
+#   endif
+# repeat while (AppGUI activa)
+#
+# stop
+# @enduml
 class AppGUI:
 
     ## @brief Constructor de la interfaz.
-    #  @param title Título de la ventana principal.
+    # @param title Título de la ventana principal.
     def __init__(self, title="App"):
         # --- Ventana principal ---
         self.root = tk.Tk()
@@ -60,12 +78,12 @@ class AppGUI:
         style.theme_use("clam")
 
         PRIMARIO = "#2b3e50"
-        SECUNDARIO = "#1c252c"
+        SEGUNDARIO = "#1c252c"
         BOTON = "#4c9aff"
         BOTON_HOVER = "#2f7de1"
         TEXTO = "#ffffff"
 
-        self.root.configure(bg=SECUNDARIO)
+        self.root.configure(bg=SEGUNDARIO)
 
         style.configure(
             "TButton",
@@ -82,8 +100,8 @@ class AppGUI:
             foreground=[("active", "white")]
         )
 
-        style.configure("TLabel", background=SECUNDARIO, foreground=TEXTO, font=("Segoe UI", 10))
-        style.configure("TFrame", background=SECUNDARIO)
+        style.configure("TLabel", background=SEGUNDARIO, foreground=TEXTO, font=("Segoe UI", 10))
+        style.configure("TFrame", background=SEGUNDARIO)
 
         # --- Instancias de lógica del negocio ---
         self.audio_converter = AudioConverter()
@@ -100,7 +118,7 @@ class AppGUI:
         self._construir_ui()
 
     ## @brief Construye todos los elementos de la interfaz gráfica.
-    #  @details Separa la UI en botones, panel de información,
+    # @details Separa la UI en botones, panel de información,
     #           texto extraído, texto encriptado y código RAW.
     def _construir_ui(self):
         frm_top = ttk.Frame(self.root, padding=10)
@@ -158,7 +176,7 @@ class AppGUI:
         self.txt_raw.configure(bg="#0e141a", fg="#b0e0ff", insertbackground="white")
 
     ## @brief Ejecuta una función en un hilo separado.
-    #  @param func Función a ejecutar.
+    # @param func Función a ejecutar.
     def _thread(self, func):
         def wrapper():
             t = threading.Thread(target=func, daemon=True)
@@ -166,7 +184,7 @@ class AppGUI:
         return wrapper
 
     ## @brief Permite seleccionar un archivo de audio desde el explorador.
-    #  @details Extrae la información técnica, bytes del archivo y muestra el RAW.
+    # @details Extrae la información técnica, bytes del archivo y muestra el RAW.
     def seleccionar_archivo(self):
         ruta = filedialog.askopenfilename(
             title="Seleccionar archivo de audio",
@@ -195,7 +213,7 @@ class AppGUI:
                 self.txt_info_audio.delete('1.0', tk.END)
                 self.txt_info_audio.insert(tk.END, resumen)
 
-                # RAW → código máquina decodificado en Latin-1
+                # RAW -> código máquina decodificado en Latin-1
                 raw_text = self.bytes_audio.decode("latin-1", errors="replace")
                 self.txt_raw.delete('1.0', tk.END)
                 self.txt_raw.insert(tk.END, raw_text)
@@ -252,7 +270,7 @@ class AppGUI:
             messagebox.showerror("Error", str(e))
 
     ## @brief Guarda la conversión en formato JSON dentro del sistema de almacenamiento.
-    #  @details Incluye texto, encriptado, info del audio y código máquina en Base64.
+    # @details Incluye texto, encriptado, info del audio y código máquina en Base64.
     def guardar_registro(self):
         if not self.ruta_audio:
             messagebox.showwarning("Atención", "Seleccione un archivo primero")

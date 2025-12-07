@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['seleccionar_5farchivo_0',['seleccionar_archivo',['../classmodules_1_1interfaz_1_1_app_g_u_i.html#a7c0fbf925b55caf6c934d1ddf9d13add',1,'modules::interfaz::AppGUI']]],
-  ['storage_1',['storage',['../classmodules_1_1interfaz_1_1_app_g_u_i.html#a95758aabf6967ff81bf00898091cc914',1,'modules::interfaz::AppGUI']]],
-  ['storage_2epy_2',['storage.py',['../storage_8py.html',1,'']]],
-  ['storagemanager_3',['StorageManager',['../classmodules_1_1storage_1_1_storage_manager.html',1,'modules::storage']]]
+  ['readme_0',['README',['../md__r_e_a_d_m_e.html',1,'']]],
+  ['readme_2emd_1',['README.md',['../_r_e_a_d_m_e_8md.html',1,'']]],
+  ['recognizer_2',['recognizer',['../classmodules_1_1audio__converter_1_1_audio_converter.html#a63931fe60e103880ce23e4a4e2ad5939',1,'modules::audio_converter::AudioConverter']]],
+  ['root_3',['root',['../classmodules_1_1interfaz_1_1_app_g_u_i.html#a53f782523d2166dd9dcbd3462b290ff5',1,'modules::interfaz::AppGUI']]],
+  ['run_4',['run',['../classmodules_1_1interfaz_1_1_app_g_u_i.html#a0cef0b73447ffa17ffd12342b0759410',1,'modules::interfaz::AppGUI']]],
+  ['ruta_5faudio_5',['ruta_audio',['../classmodules_1_1interfaz_1_1_app_g_u_i.html#ac20000541af0ba3f448cd9a6c2559270',1,'modules::interfaz::AppGUI']]]
 ];

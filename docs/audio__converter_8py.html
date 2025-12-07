@@ -93,11 +93,15 @@ $(function(){initNavTree('audio__converter_8py.html','',''); });
 </div><!--header-->
 <div class="contents">
 
+<p>Contiene la clase encargada de convertir audios y extraer texto mediante reconocimiento de voz.  
+<a href="#details">Más...</a></p>
+
 <p><a href="audio__converter_8py_source.html">Ir al código fuente de este archivo.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Clases</h2></td></tr>
 <tr class="memitem:modules_2Eaudio_5Fconverter_2EAudioConverter" id="r_modules_2Eaudio_5Fconverter_2EAudioConverter"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmodules_1_1audio__converter_1_1_audio_converter.html">modules.audio_converter.AudioConverter</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Diagrama de Flujo (Método extraer_texto_de_audio).  <a href="classmodules_1_1audio__converter_1_1_audio_converter.html#details">Más...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Espacios de nombres</h2></td></tr>
@@ -108,7 +112,18 @@ Espacios de nombres</h2></td></tr>
 Variables</h2></td></tr>
 <tr class="memitem:a86b877b3cde72aa40e4bc5ec66c95830" id="r_a86b877b3cde72aa40e4bc5ec66c95830"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemodules_1_1audio__converter.html#a86b877b3cde72aa40e4bc5ec66c95830">modules.audio_converter.logger</a> = logging.getLogger(__name__)</td></tr>
 </table>
-</div><!-- contents -->
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Descripción detallada</h2>
+<div class="textblock"><p>Contiene la clase encargada de convertir audios y extraer texto mediante reconocimiento de voz. </p>
+<p>Esta clase encapsula:</p><ul>
+<li>Validación de archivos de audio</li>
+<li>Conversión a WAV estándar (16kHz, mono)</li>
+<li>Procesamiento con Google Speech Recognition</li>
+<li>Obtención de metadatos del archivo</li>
+<li>Lectura de bytes para mostrar contenido RAW (código máquina) </li>
+</ul>
+
+<p class="definition">Definición en el archivo <a class="el" href="audio__converter_8py_source.html">audio_converter.py</a>.</p>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>

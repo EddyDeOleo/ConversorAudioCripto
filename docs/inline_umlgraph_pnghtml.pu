@@ -1,0 +1,182 @@
+@startuml inline_umlgraph_1.png
+title Escenario: Conversión y Encriptación de Audio
+
+actor Usuario
+participant AppGUI as "interfaz.py"
+participant AudioConverter as "audio_converter.py"
+participant CryptoEngine as "encriptacion.py"
+participant Storage as "storage.py"
+
+Usuario -> AppGUI : click_en_Convertir(ruta_audio)
+
+AppGUI -> AudioConverter : cargar_y_analizar(ruta_audio)
+activate AudioConverter
+AudioConverter -> AudioConverter : convertir_a_texto()
+return texto_plano, metadata_audio
+deactivate AudioConverter
+
+AppGUI -> CryptoEngine : encriptar_texto(texto_plano, CLAVE_FERNET)
+activate CryptoEngine
+return texto_encriptado
+deactivate CryptoEngine
+
+AppGUI -> Storage : guardar_registro(texto_encriptado, datos_raw, metadata_audio)
+activate Storage
+Storage -> Storage : escribir_en_json(conversiones.json)
+return Registro_Guardado
+deactivate Storage
+
+AppGUI -> Usuario : notificacion_Exito()
+@enduml
+@startuml inline_umlgraph_2.png
+title Flujo: Extraer Texto de Audio
+
+start
+
+:Validar Archivo (validar_archivo);
+
+if (Archivo es válido?) is (No)
+  :Lanzar Excepción (ValueError);
+  stop
+endif
+
+partition Conversión {
+  if (Formato es WAV?) is (No)
+    :Convertir a WAV (16kHz, mono);
+    :Obtener ruta_wav y duración;
+  else (Sí)
+    :Obtener duración de WAV;
+  endif
+}
+
+#LightBlue:Ajustar a ruido ambiente;
+:Procesar Audio;
+#LightBlue:Transcribir usando Google Speech Recognition;
+
+if (Reconocimiento fue exitoso?) is (Sí)
+  :Limpieza (Eliminar WAV temporal);
+  :Retornar (Texto, Duración);
+  stop
+else (No/Error)
+  :Limpieza (Eliminar WAV temporal);
+  if (Error es de Conexión/Servicio?) is (Sí)
+    :Lanzar Excepción (sr.RequestError);
+  else (No se entendió el audio)
+    :Lanzar Excepción (sr.UnknownValueError);
+  endif
+  stop
+endif
+@enduml
+@startuml inline_umlgraph_3.png
+title Flujo de Encriptación/Desencriptación Fernet
+
+start
+
+partition Encriptar Texto {
+  :Entrada (Texto Plano);
+  if (Texto es vacío?) is (Sí)
+    :Lanzar ValueError;
+    stop
+  endif
+  :Codificar a UTF-8;
+  #LightBlue:Fernet.encrypt();
+  :Salida (Token Base64 bytes);
+}
+
+partition Desencriptar Token {
+  :Entrada (Token Fernet bytes);
+  if (Token es vacío?) is (Sí)
+    :Lanzar ValueError;
+    stop
+  endif
+  #LightBlue:Fernet.decrypt();
+  :Decodificar a UTF-8;
+  :Salida (Texto Plano);
+}
+
+stop
+@enduml
+@startuml inline_umlgraph_4.png
+title Flujo de Procesamiento (Lógica de la Interfaz)
+
+start
+:AppGUI Lanzada;
+:Usuario selecciona archivo;
+
+repeat
+  if (Click en 'Convertir a Texto') then (Sí)
+    :AudioConverter.extraer_texto_de_audio();
+    :Mostrar Texto Extraído;
+  elseif (Click en 'Encriptar Texto') then (Sí)
+    :CryptoEngine.encriptar_texto();
+    :Mostrar Texto Encriptado;
+  elseif (Click en 'Desencriptar Texto') then (Sí)
+    :CryptoEngine.desencriptar_texto();
+    :Mostrar Texto Desencriptado;
+  elseif (Click en 'Guardar conversión') then (Sí)
+    :StorageManager.agregar_conversion();
+  else (No)
+    :Esperar acción de usuario;
+  endif
+repeat while (AppGUI activa)
+
+stop
+@enduml
+@startuml inline_umlgraph_5.png
+title Diagrama HIPO: StorageManager
+
+rectangle "Registro de Conversión" as INPUT {
+    **INPUT:**
+    * Archivo Origen (ruta)
+    * Texto Claro
+    * Texto Encriptado (Token)
+    * Bytes RAW (Código Máquina)
+    * Metadatos de Audio (Duración, Info)
+}
+
+rectangle "Gestión de Almacenamiento JSON" as PROCESS {
+    **PROCESS:**
+    -> 1. Leer archivo JSON (conversiones.json)
+    -> 2. Generar nuevo ID/Timestamp
+    -> 3. Normalizar datos (Bytes -> Base64/Str)
+    -> 4. Agregar nuevo registro
+    -> 5. Escribir/Guardar JSON
+}
+
+rectangle "Archivo JSON Actualizado" as OUTPUT {
+    **OUTPUT:**
+    * Conversión persistida (ID, Datos)
+    * Lista completa de registros
+    * Estado (Éxito/Error)
+}
+
+INPUT --> PROCESS
+PROCESS --> OUTPUT
+@enduml
+@startuml inline_umlgraph_6.png
+title Flujo: Agregar Conversión (StorageManager)
+
+start
+
+:Llamar _leer_todo (Leer archivo JSON);
+
+:Obtener lista de conversiones;
+
+:Calcular próximo ID;
+
+:Normalizar campos (bytes a Base64/str);
+
+:Crear registro_final con timestamp UTC;
+
+:Añadir registro_final a la lista de conversiones;
+
+:Llamar _escribir_todo (Guardar archivo JSON);
+
+if (Escritura exitosa?) is (Sí)
+  :Retornar registro guardado;
+  stop
+else (No/Error)
+  :Lanzar Excepción (Error al guardar);
+  stop
+endif
+@enduml

@@ -17,6 +17,44 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+# ==============================================================================
+# DIAGRAMA DE ACTIVIDAD PLANTUML
+# Bloque de diagrama colocado fuera de la docstring para asegurar el renderizado.
+# ==============================================================================
+
+## Diagrama de Flujo (Métodos encriptar_texto y desencriptar_texto)
+#
+# Este diagrama de actividad representa los dos flujos principales
+# dentro del EncriptadorFernet: encriptación y desencriptación.
+# @startuml
+# title Flujo de Encriptación/Desencriptación Fernet
+# 
+# start
+# 
+# partition Encriptar Texto {
+#   :Entrada (Texto Plano);
+#   if (Texto es vacío?) is (Sí)
+#     :Lanzar ValueError;
+#     stop
+#   endif
+#   :Codificar a UTF-8;
+#   #LightBlue:Fernet.encrypt();
+#   :Salida (Token Base64 bytes);
+# }
+# 
+# partition Desencriptar Token {
+#   :Entrada (Token Fernet bytes);
+#   if (Token es vacío?) is (Sí)
+#     :Lanzar ValueError;
+#     stop
+#   endif
+#   #LightBlue:Fernet.decrypt();
+#   :Decodificar a UTF-8;
+#   :Salida (Texto Plano);
+# }
+# 
+# stop
+# @enduml
 
 class EncriptadorFernet:
     """
@@ -74,12 +112,16 @@ class EncriptadorFernet:
         if not token:
             raise ValueError("El token no puede estar vacío")
 
-        texto_bytes = self.cipher.decrypt(token)
-        texto = texto_bytes.decode("utf-8")
+        try:
+            texto_bytes = self.cipher.decrypt(token)
+            texto = texto_bytes.decode("utf-8")
 
-        logger.info(f"Texto desencriptado: {len(token)} bytes → {len(texto)} chars")
+            logger.info(f"Texto desencriptado: {len(token)} bytes → {len(texto)} chars")
 
-        return texto
+            return texto
+        except Exception as e:
+            logger.error(f"Error de desencriptación (token inválido o clave incorrecta): {e}")
+            raise ValueError("Token inválido o clave Fernet incorrecta.") # Manejo de excepción más específica
 
     def obtener_info_encriptacion(self, texto_original: str, token: bytes):
         """

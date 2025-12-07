@@ -92,12 +92,15 @@ $(function(){initNavTree('classmodules_1_1storage_1_1_storage_manager.html','','
   <div class="headertitle"><div class="title">Referencia de la clase modules.storage.StorageManager</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Diagrama HIPO (<a class="el" href="classmodules_1_1storage_1_1_storage_manager.html" title="Diagrama HIPO (StorageManager).">StorageManager</a>).  
+ <a href="#details">Más...</a></p>
 <div class="dynheader">
 Diagrama de colaboración de modules.storage.StorageManager:</div>
 <div class="dyncontent">
 <div class="center"><img src="classmodules_1_1storage_1_1_storage_manager__coll__graph.png" border="0" usemap="#amodules_8storage_8_storage_manager_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="amodules_8storage_8_storage_manager_coll__map" id="amodules_8storage_8_storage_manager_coll__map">
-<area shape="rect" title=" " alt="" coords="5,5,211,203"/>
+<area shape="rect" title="Diagrama HIPO (StorageManager)." alt="" coords="5,5,211,203"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -119,7 +122,15 @@ Métodos protegidos</h2></td></tr>
 <tr class="memitem:ab369664374d0c3e0c746849e11c572fb" id="r_ab369664374d0c3e0c746849e11c572fb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab369664374d0c3e0c746849e11c572fb">_escribir_todo</a> (self, data)</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Descripción detallada</h2>
-<div class="textblock"><pre class="fragment">@class StorageManager
+<div class="textblock"><p>Diagrama HIPO (<a class="el" href="classmodules_1_1storage_1_1_storage_manager.html" title="Diagrama HIPO (StorageManager).">StorageManager</a>). </p>
+<p>Representa el flujo jerárquico del proceso de almacenamiento de conversiones. </p><div class="plantumlgraph">
+<img src="inline_umlgraph_5.png" />
+</div>
+<p>Diagrama de Flujo (Método agregar_conversion)</p>
+<p>Este diagrama de actividad representa el flujo completo para persistir un nuevo registro de conversión de audio a texto en el archivo JSON. </p><div class="plantumlgraph">
+<img src="inline_umlgraph_6.png" />
+</div>
+<pre class="fragment">@class StorageManager
 @brief Clase para gestionar almacenamiento persistente en archivos JSON.
 
 Permite:
@@ -127,7 +138,7 @@ Permite:
 - Listar conversiones
 - Buscar conversiones por ID
 </pre> 
-<p class="definition">Definición en la línea <a class="el" href="storage_8py_source.html#l00028">28</a> del archivo <a class="el" href="storage_8py_source.html">storage.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="storage_8py_source.html#l00107">107</a> del archivo <a class="el" href="storage_8py_source.html">storage.py</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Documentación de constructores y destructores</h2>
 <a id="afb9e29384e0f2df5c3e009c8fbea215b" name="afb9e29384e0f2df5c3e009c8fbea215b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afb9e29384e0f2df5c3e009c8fbea215b">&#9670;&#160;</a></span>__init__()</h2>
@@ -150,7 +161,7 @@ Permite:
 <pre class="fragment">@brief Constructor: asegura que el archivo JSON exista.
 @param archivo Ruta completa al archivo de conversiones.
 </pre> 
-<p class="definition">Definición en la línea <a class="el" href="storage_8py_source.html#l00039">39</a> del archivo <a class="el" href="storage_8py_source.html">storage.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="storage_8py_source.html#l00118">118</a> del archivo <a class="el" href="storage_8py_source.html">storage.py</a>.</p>
 
 </div>
 </div>
@@ -185,7 +196,7 @@ Permite:
 @param data Diccionario a escribir.
 @return bool True si se guardó correctamente.
 </pre> 
-<p class="definition">Definición en la línea <a class="el" href="storage_8py_source.html#l00071">71</a> del archivo <a class="el" href="storage_8py_source.html">storage.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="storage_8py_source.html#l00150">150</a> del archivo <a class="el" href="storage_8py_source.html">storage.py</a>.</p>
 <div class="dynheader">
 Gráfico de llamadas a esta función:</div>
 <div class="dyncontent">
@@ -223,7 +234,7 @@ Gráfico de llamadas a esta función:</div>
 </div><div class="memdoc">
 <pre class="fragment">@brief Inicializa el archivo JSON con la estructura base.
 </pre> 
-<p class="definition">Definición en la línea <a class="el" href="storage_8py_source.html#l00050">50</a> del archivo <a class="el" href="storage_8py_source.html">storage.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="storage_8py_source.html#l00129">129</a> del archivo <a class="el" href="storage_8py_source.html">storage.py</a>.</p>
 <div class="dynheader">
 Gráfico de llamadas a esta función:</div>
 <div class="dyncontent">
@@ -268,7 +279,7 @@ Gráfico de llamadas a esta función:</div>
 <pre class="fragment">@brief Lee el archivo JSON completo.
 @return dict Contenido del archivo.
 </pre> 
-<p class="definition">Definición en la línea <a class="el" href="storage_8py_source.html#l00058">58</a> del archivo <a class="el" href="storage_8py_source.html">storage.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="storage_8py_source.html#l00137">137</a> del archivo <a class="el" href="storage_8py_source.html">storage.py</a>.</p>
 <div class="dynheader">
 Gráfico de llamadas de esta función:</div>
 <div class="dyncontent">
@@ -317,18 +328,18 @@ Gráfico de llamadas a esta función:</div>
 <pre class="fragment">@brief Agrega un registro de conversión al archivo.
 
 @param registro Dict con campos obligatorios:
-       - archivo_origen
-       - ruta
-       - texto
-       - texto_encriptado (bytes o str)
-       - codigo_maquina (bytes o str)
-       - duracion_segundos
-       - info_audio
+         - archivo_origen
+         - ruta
+         - texto
+         - texto_encriptado (bytes o str)
+         - codigo_maquina (bytes o str)
+         - duracion_segundos
+         - info_audio
 
 @return dict Registro final guardado.
 @exception Exception Si ocurre un error al escribir el archivo.
 </pre> 
-<p class="definition">Definición en la línea <a class="el" href="storage_8py_source.html#l00085">85</a> del archivo <a class="el" href="storage_8py_source.html">storage.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="storage_8py_source.html#l00164">164</a> del archivo <a class="el" href="storage_8py_source.html">storage.py</a>.</p>
 <div class="dynheader">
 Gráfico de llamadas de esta función:</div>
 <div class="dyncontent">
@@ -363,7 +374,7 @@ Gráfico de llamadas de esta función:</div>
 <pre class="fragment">@brief Obtiene la lista completa de conversiones almacenadas.
 @return list Lista de conversiones.
 </pre> 
-<p class="definition">Definición en la línea <a class="el" href="storage_8py_source.html#l00136">136</a> del archivo <a class="el" href="storage_8py_source.html">storage.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="storage_8py_source.html#l00221">221</a> del archivo <a class="el" href="storage_8py_source.html">storage.py</a>.</p>
 <div class="dynheader">
 Gráfico de llamadas de esta función:</div>
 <div class="dyncontent">
@@ -411,7 +422,7 @@ Gráfico de llamadas a esta función:</div>
 @param id_ Identificador de la conversión.
 @return dict|None Registro encontrado o None.
 </pre> 
-<p class="definition">Definición en la línea <a class="el" href="storage_8py_source.html#l00144">144</a> del archivo <a class="el" href="storage_8py_source.html">storage.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="storage_8py_source.html#l00229">229</a> del archivo <a class="el" href="storage_8py_source.html">storage.py</a>.</p>
 <div class="dynheader">
 Gráfico de llamadas de esta función:</div>
 <div class="dyncontent">
@@ -442,7 +453,7 @@ Gráfico de llamadas de esta función:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definición en la línea <a class="el" href="storage_8py_source.html#l00044">44</a> del archivo <a class="el" href="storage_8py_source.html">storage.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="storage_8py_source.html#l00123">123</a> del archivo <a class="el" href="storage_8py_source.html">storage.py</a>.</p>
 
 </div>
 </div>

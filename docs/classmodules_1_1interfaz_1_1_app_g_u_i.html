@@ -149,18 +149,21 @@ Métodos protegidos</h2></td></tr>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Descripción detallada</h2>
 <div class="textblock"><p>Clase principal de la interfaz gráfica. </p>
 <p>Crea la ventana, los componentes gráficos y gestiona todas las acciones del usuario relacionadas con:</p><ul>
-<li>Selección de audio <br  />
-</li>
-<li>Conversión a texto <br  />
-</li>
-<li>Encriptación y desencriptación <br  />
-</li>
-<li>Visualización de RAW <br  />
-</li>
-<li>Guardado de registros </li>
+<li>Selección de audio</li>
+<li>Conversión a texto</li>
+<li>Encriptación y desencriptación</li>
+<li>Visualización de RAW</li>
+<li>Guardado de registros</li>
 </ul>
-
-<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00047">47</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md0"></a>
+Diagrama de Flujo (Lógica de la Interfaz)</h2>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md1"></a>
+Este diagrama describe el flujo de acciones disponibles para el usuario en la interfaz.</h1>
+<div class="plantumlgraph">
+<img src="inline_umlgraph_4.png" />
+</div>
+ 
+<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00065">65</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Documentación de constructores y destructores</h2>
 <a id="a52e66fd9aa0bf7ecf51bea8b34f5749d" name="a52e66fd9aa0bf7ecf51bea8b34f5749d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a52e66fd9aa0bf7ecf51bea8b34f5749d">&#9670;&#160;</a></span>__init__()</h2>
@@ -189,7 +192,7 @@ Métodos protegidos</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00051">51</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00069">69</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
 
 </div>
 </div>
@@ -220,7 +223,7 @@ Métodos protegidos</h2></td></tr>
 <p>Construye todos los elementos de la interfaz gráfica. </p>
 <p>Separa la UI en botones, panel de información, texto extraído, texto encriptado y código RAW. </p>
 
-<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00105">105</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00123">123</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
 <div class="dynheader">
 Gráfico de llamadas de esta función:</div>
 <div class="dyncontent">
@@ -263,7 +266,7 @@ Gráfico de llamadas de esta función:</div>
 
 <p>Cambia el texto del título de la ventana. </p>
 
-<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00281">281</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00299">299</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
 <div class="dynheader">
 Gráfico de llamadas a esta función:</div>
 <div class="dyncontent">
@@ -312,7 +315,7 @@ Gráfico de llamadas a esta función:</div>
   </dd>
 </dl>
 
-<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00162">162</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00180">180</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
 
 </div>
 </div>
@@ -333,7 +336,7 @@ Gráfico de llamadas a esta función:</div>
 
 <p>Convierte el archivo de audio a texto mediante Speech Recognition. </p>
 
-<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00208">208</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00226">226</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
 <div class="dynheader">
 Gráfico de llamadas de esta función:</div>
 <div class="dyncontent">
@@ -364,7 +367,7 @@ Gráfico de llamadas de esta función:</div>
 
 <p>Desencripta el texto encriptado y lo muestra. </p>
 
-<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00241">241</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00259">259</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
 <div class="dynheader">
 Gráfico de llamadas de esta función:</div>
 <div class="dyncontent">
@@ -403,7 +406,7 @@ Gráfico de llamadas a esta función:</div>
 
 <p>Encripta el texto extraído usando Fernet. </p>
 
-<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00227">227</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00245">245</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
 <div class="dynheader">
 Gráfico de llamadas de esta función:</div>
 <div class="dyncontent">
@@ -443,7 +446,7 @@ Gráfico de llamadas a esta función:</div>
 <p>Guarda la conversión en formato JSON dentro del sistema de almacenamiento. </p>
 <p>Incluye texto, encriptado, info del audio y código máquina en Base64. </p>
 
-<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00256">256</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00274">274</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
 
 </div>
 </div>
@@ -464,7 +467,7 @@ Gráfico de llamadas a esta función:</div>
 
 <p>Inicia el loop principal de Tkinter. </p>
 
-<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00285">285</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00303">303</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
 
 </div>
 </div>
@@ -486,7 +489,7 @@ Gráfico de llamadas a esta función:</div>
 <p>Permite seleccionar un archivo de audio desde el explorador. </p>
 <p>Extrae la información técnica, bytes del archivo y muestra el RAW. </p>
 
-<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00170">170</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00188">188</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
 <div class="dynheader">
 Gráfico de llamadas a esta función:</div>
 <div class="dyncontent">
@@ -513,7 +516,7 @@ Gráfico de llamadas a esta función:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00089">89</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00107">107</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
 
 </div>
 </div>
@@ -529,7 +532,7 @@ Gráfico de llamadas a esta función:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00097">97</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00115">115</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
 
 </div>
 </div>
@@ -545,7 +548,7 @@ Gráfico de llamadas a esta función:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00090">90</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00108">108</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
 
 </div>
 </div>
@@ -561,7 +564,7 @@ Gráfico de llamadas a esta función:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00113">113</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00131">131</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
 
 </div>
 </div>
@@ -577,7 +580,7 @@ Gráfico de llamadas a esta función:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00053">53</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00071">71</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
 
 </div>
 </div>
@@ -593,7 +596,7 @@ Gráfico de llamadas a esta función:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00094">94</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00112">112</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
 
 </div>
 </div>
@@ -609,7 +612,7 @@ Gráfico de llamadas a esta función:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00091">91</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00109">109</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
 
 </div>
 </div>
@@ -625,7 +628,7 @@ Gráfico de llamadas a esta función:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00096">96</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00114">114</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
 
 </div>
 </div>
@@ -641,7 +644,7 @@ Gráfico de llamadas a esta función:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00095">95</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00113">113</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
 
 </div>
 </div>
@@ -657,7 +660,7 @@ Gráfico de llamadas a esta función:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00148">148</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00166">166</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
 
 </div>
 </div>
@@ -673,7 +676,7 @@ Gráfico de llamadas a esta función:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00132">132</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00150">150</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
 
 </div>
 </div>
@@ -689,7 +692,7 @@ Gráfico de llamadas a esta función:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00156">156</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00174">174</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
 
 </div>
 </div>
@@ -705,7 +708,7 @@ Gráfico de llamadas a esta función:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00140">140</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="interfaz_8py_source.html#l00158">158</a> del archivo <a class="el" href="interfaz_8py_source.html">interfaz.py</a>.</p>
 
 </div>
 </div>

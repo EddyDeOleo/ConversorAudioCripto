@@ -24,6 +24,85 @@ import base64
 
 logger = logging.getLogger(__name__)
 
+# ==============================================================================
+# DIAGRAMA HIPO (HIERARCHY-INPUT-PROCESS-OUTPUT)
+# Describe la función principal del módulo StorageManager.
+# ==============================================================================
+
+## Diagrama HIPO (StorageManager)
+#
+# Representa el flujo jerárquico del proceso de almacenamiento de conversiones.
+# @startuml
+# title Diagrama HIPO: StorageManager
+# 
+# rectangle "Registro de Conversión" as INPUT {
+#     **INPUT:**
+#     * Archivo Origen (ruta)
+#     * Texto Claro
+#     * Texto Encriptado (Token)
+#     * Bytes RAW (Código Máquina)
+#     * Metadatos de Audio (Duración, Info)
+# }
+# 
+# rectangle "Gestión de Almacenamiento JSON" as PROCESS {
+#     **PROCESS:**
+#     -> 1. Leer archivo JSON (conversiones.json)
+#     -> 2. Generar nuevo ID/Timestamp
+#     -> 3. Normalizar datos (Bytes -> Base64/Str)
+#     -> 4. Agregar nuevo registro
+#     -> 5. Escribir/Guardar JSON
+# }
+# 
+# rectangle "Archivo JSON Actualizado" as OUTPUT {
+#     **OUTPUT:**
+#     * Conversión persistida (ID, Datos)
+#     * Lista completa de registros
+#     * Estado (Éxito/Error)
+# }
+# 
+# INPUT --> PROCESS
+# PROCESS --> OUTPUT
+# 
+# @enduml
+
+# ==============================================================================
+# DIAGRAMA DE ACTIVIDAD PLANTUML
+# Flujo del método agregar_conversion.
+# ==============================================================================
+
+## Diagrama de Flujo (Método agregar_conversion)
+#
+# Este diagrama de actividad representa el flujo completo para persistir
+# un nuevo registro de conversión de audio a texto en el archivo JSON.
+# @startuml
+# title Flujo: Agregar Conversión (StorageManager)
+# 
+# start
+# 
+# :Llamar _leer_todo (Leer archivo JSON);
+# 
+# :Obtener lista de conversiones;
+# 
+# :Calcular próximo ID;
+# 
+# :Normalizar campos (bytes a Base64/str);
+# 
+# :Crear registro_final con timestamp UTC;
+# 
+# :Añadir registro_final a la lista de conversiones;
+# 
+# :Llamar _escribir_todo (Guardar archivo JSON);
+# 
+# if (Escritura exitosa?) is (Sí)
+#   :Retornar registro guardado;
+#   stop
+# else (No/Error)
+#   :Lanzar Excepción (Error al guardar);
+#   stop
+# endif
+# 
+# @enduml
+
 
 class StorageManager:
     """
@@ -87,13 +166,13 @@ class StorageManager:
         @brief Agrega un registro de conversión al archivo.
 
         @param registro Dict con campos obligatorios:
-               - archivo_origen
-               - ruta
-               - texto
-               - texto_encriptado (bytes o str)
-               - codigo_maquina (bytes o str)
-               - duracion_segundos
-               - info_audio
+                 - archivo_origen
+                 - ruta
+                 - texto
+                 - texto_encriptado (bytes o str)
+                 - codigo_maquina (bytes o str)
+                 - duracion_segundos
+                 - info_audio
 
         @return dict Registro final guardado.
         @exception Exception Si ocurre un error al escribir el archivo.
@@ -102,22 +181,28 @@ class StorageManager:
         conversiones = data.get("conversiones", [])
         next_id = (conversiones[-1]['id'] + 1) if conversiones else 1
 
-        # Normalizar campos que pueden venir en bytes
+        # Normalizar campos que pueden venir en bytes (Base64/UTF-8)
+        texto_encriptado_norm = registro.get("texto_encriptado")
+        if isinstance(texto_encriptado_norm, (bytes, bytearray)):
+            texto_encriptado_norm = texto_encriptado_norm.decode('utf-8')
+
+        codigo_maquina_norm = registro.get("codigo_maquina")
+        if isinstance(codigo_maquina_norm, (bytes, bytearray)):
+            # Asumo que el código máquina es Base64 para ser JSON-safe
+            try:
+                codigo_maquina_norm = base64.b64encode(codigo_maquina_norm).decode('utf-8')
+            except Exception:
+                # Si no es Base64, simplemente decodificar como UTF-8
+                codigo_maquina_norm = codigo_maquina_norm.decode('utf-8', errors='ignore')
+
+
         registro_final = {
             "id": next_id,
             "archivo_origen": registro.get("archivo_origen"),
             "ruta": registro.get("ruta"),
             "texto": registro.get("texto"),
-            "texto_encriptado": (
-                registro.get("texto_encriptado").decode('utf-8')
-                if isinstance(registro.get("texto_encriptado"), (bytes, bytearray))
-                else registro.get("texto_encriptado")
-            ),
-            "codigo_maquina": (
-                registro.get("codigo_maquina").decode('utf-8')
-                if isinstance(registro.get("codigo_maquina"), (bytes, bytearray))
-                else registro.get("codigo_maquina")
-            ),
+            "texto_encriptado": texto_encriptado_norm,
+            "codigo_maquina": codigo_maquina_norm,
             "duracion_segundos": registro.get("duracion_segundos"),
             "info_audio": registro.get("info_audio"),
             "fecha": datetime.utcnow().isoformat() + "Z"
